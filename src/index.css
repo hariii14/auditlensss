@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #F7F7F4;
+    color: #20231F;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  /* Severity badges — compact and consistent */
+  .badge-high {
+    @apply inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-red-50 text-red-700 border border-red-200;
+  }
+  .badge-medium {
+    @apply inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-amber-50 text-amber-700 border border-amber-200;
+  }
+  .badge-low {
+    @apply inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-paper-200 text-charcoal-600 border border-paper-300;
+  }
+
+  /* Status badges */
+  .status-needs-review {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200;
+  }
+  .status-escalated {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-600 text-white;
+  }
+  .status-verified {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-forest-100 text-forest-900 border border-forest-600/20;
+  }
+  .status-resolved {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-paper-200 text-charcoal-600 border border-paper-300;
+  }
+
+  /* Panel card */
+  .panel {
+    @apply bg-white border border-paper-300 rounded-xl;
+  }
+  .panel-header {
+    @apply px-4 py-3 border-b border-paper-200 flex items-center justify-between;
+  }
+  .panel-title {
+    @apply text-sm font-bold text-charcoal-900;
+  }
+
+  /* Compact table rows */
+  .data-row {
+    @apply border-b border-paper-200 last:border-0 hover:bg-paper-50 transition-colors;
+  }
+  .data-cell {
+    @apply py-2.5 px-3 text-xs text-charcoal-800;
+  }
+
+  /* Form controls */
+  .form-input {
+    @apply px-3 py-1.5 rounded-lg border border-paper-300 text-xs bg-white text-charcoal-800 focus:outline-none focus:ring-1 focus:ring-forest-600 focus:border-forest-600;
+  }
+  .btn-primary {
+    @apply px-4 py-2 rounded-lg bg-forest-700 hover:bg-forest-800 text-white text-xs font-semibold transition-colors shadow-subtle flex items-center gap-1.5;
+  }
+  .btn-secondary {
+    @apply px-3.5 py-1.5 rounded-lg border border-paper-300 bg-white hover:bg-paper-50 text-charcoal-700 text-xs font-medium transition-colors flex items-center gap-1.5;
+  }
+  .btn-danger {
+    @apply px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-semibold transition-colors flex items-center gap-1.5;
+  }
+}
+
+/* Custom scrollbar — restrained */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #DEDFD8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #949B92; }
+
+/* XYFlow graph */
+.react-flow__attribution { display: none !important; }
+.react-flow__edge-path { stroke-width: 1.5px; }
+.react-flow__controls { box-shadow: none !important; border: 1px solid #DEDFD8 !important; border-radius: 8px !important; overflow: hidden; }
+.react-flow__controls-button { background: #FBFBF9 !important; border-bottom: 1px solid #DEDFD8 !important; }
+
+/* Subtle row hover for tables */
+.inv-row { transition: background-color 0.1s; }
+.inv-row:hover { background-color: #FBFBF9; }
+
+/* Pulse for live indicators */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* Dashboard-only responsive composition. */
+.dashboard-metrics-grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+
+@media (min-width: 640px) {
+  .dashboard-metrics-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-header-row {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .dashboard-metrics-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .dashboard-content-grid { grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr); }
+  .dashboard-primary-grid { grid-template-columns: minmax(250px, 0.9fr) minmax(0, 1.5fr); }
+}
+

@@ -1,0 +1,7 @@
+{
+  "name": "AuditLens — Autonomous Multimodal Financial Forensics",
+  "description": "Autonomous multimodal financial forensics and waste recovery for SMBs. Every transaction has a story. Find what doesn't add up.",
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
