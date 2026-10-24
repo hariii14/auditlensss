@@ -96,7 +96,7 @@ Synthetic demo data will be used where appropriate. Any external datasets, libra
 The AuditLens demo demonstrates uploading financial documents, extracting key information, identifying potential inconsistencies, and generating an evidence-based report for human review.
 
 Demo inputs include sample invoices and financial documents containing both valid records and deliberately introduced anomalies.
-https://auditlensss.vercel.app/dashboard
+https://auditlensss.vercel.app
 presentation link: https://www.canva.com/design/DAHYv4yDrHw/238S75ZOP9q-HTyKM6FJSg/edit
 
 
