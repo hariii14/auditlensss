@@ -1,134 +1,101 @@
-# AuditLens — Autonomous Multimodal Financial Forensics & Waste Recovery
+# AuditLens
 
-> **"Every transaction has a story. Find what doesn't add up."**
+AI- assisted financial document review for Small and Medium-sized businesses
 
-AuditLens is an autonomous multimodal financial forensics and waste recovery platform built for SMBs, agencies, and fast-growing service firms. It reconciles multimodal financial streams—including PDF invoices, mobile receipt photos, bank statement feeds, corporate credit card debits, and inbound vendor emails—to uncover silent SaaS overlaps, wire redirection fraud, and tax write-off leakage in plain English.
+## 1. Overview
 
----
+AuditLens is a project designed to help small and medium-sized businesses review financial documents and identify potential inconsistencies.
 
-## 🌟 Key Features
+It aims to make checking invoices, receipts, and bank transaction records easier by organizing information, comparing records, and highlighting items that may need human review.
 
-1. **Interactive Evidence Graph (`@xyflow/react`):**
-   - Signature visual network linking **Vendors**, **Invoices**, **Transactions**, **Vendor Emails**, **SaaS Contracts**, and **Anomalies**.
-   - **Mode A: Vendor Investigation**: Select any vendor (CloudBox, Figma, Apex Logistics, etc.) to isolate their full billing cluster.
-   - **Mode B: Anomaly Path Focus**: Focus on any discrepancy finding to light up the exact supporting record path.
-   - **Slide-Out Inspector Drawer**: Inspect raw source documents, extracted fields, and confidence scores.
+## 2. Problem Statement
 
-2. **Deterministic Forensic Anomaly Engine:**
-   - 8 testable, reproducible forensic rules:
-     1. Duplicate Invoices (`RULE_DUPLICATE_INVOICES`)
-     2. Duplicate Payments Across Cards (`RULE_DUPLICATE_PAYMENTS_CROSS_ACCOUNTS`)
-     3. Invoice-to-Transaction Amount Mismatches (`RULE_INVOICE_TRANSACTION_AMOUNT_MISMATCH`)
-     4. Conflicting Vendor Remittance Details (`RULE_CONFLICTING_PAYMENT_DETAILS`)
-     5. Beneficiary Alteration & Redirection (`RULE_BENEFICIARY_ALTERATION_AND_SPOOFING`)
-     6. SaaS Subscription Overlap & Zombie License Leakage (`RULE_SAAS_DUPLICATE_SUBSCRIPTION_OVERLAP`, `RULE_ZOMBIE_SUBSCRIPTION_INACTIVE_USERS`)
-     7. Arithmetic & Tax Inconsistencies (`RULE_INVOICE_LINE_ITEM_ARITHMETIC`)
-     8. Typosquatting & Email Homoglyphs (`RULE_DOMAIN_HOMOGLYPH_SPOOF`)
+Small businesses often manage financial documents manually. 
 
-3. **Multimodal Ingestion Pipeline:**
-   - Real drag-and-drop file upload supporting PDF, PNG, JPG, JPEG, WEBP, CSV, and TXT.
-   - Smart Viewfinder simulator with real-time edge detection, auto-shutter, glare compensation, and 300+ DPI validation.
-   - Inbound email forwarding simulator (`receipts@auditlens.com`).
-   - Powered by **Google Gemini 1.5 Flash** via `@google/generative-ai` with structured Zod schema validation.
-   - Seamless fallback to local deterministic parser in synthetic demo mode when no API key is provided.
+This can make it difficult to identify duplicate invoices, incorrect totals, missing information, or inconsistencies between records.
 
-4. **Human-in-the-Loop Investigation Workspace:**
-   - Plain-English forensic findings without cryptic hash alerts.
-   - Side-by-side remittance comparison (Historical Verified Bank vs Proposed Offshore Wire).
-   - 1-tap phone dialer for verified vendor contact on file.
-   - Interactive verification checklist.
-   - Decision Action Bar: `[Needs Review]`, `[I Verified This — Approve]`, `[Pause Payment & Escalate]`.
-   - Chronological audit log with timestamps and author signatures.
+AuditLens aims to simplify this process and help users review potential issues more efficiently and quickly.
 
-5. **CPA Audit Reports & Immutable Cryptographic Ledger:**
-   - Client-side PDF investigation report compiler (`jspdf`).
-   - CSV export for Schedule C tax compliance.
-   - SHA-256 Ledger Verification Hash for tamper-proof mathematical provenance.
-   - **Zero Disruption Guarantee:** AuditLens never alters external subscriptions or pauses payments without explicit user approval.
+## 3. Users and context
+Our main users are small and medium-sized business owners, accountants, and finance teams.
 
----
+They often work with multiple financial documents and need a simpler way to check records, identify mistakes, and investigate unusual transactions.
 
-## 🏗 Tech Stack
+## 3. Solution overview
+AuditLens is an AI-assisted tool that reads financial documents, extracts important information, and checks for possible inconsistencies within the records.
 
-- **Frontend:**
-  - React 18
-  - TypeScript
-  - Vite
-  - Tailwind CSS (Warm off-white `#F7F7F4`, Forest green `#176B4D`, Deep charcoal `#20231F`, Cobalt blue `#2B59FF`)
-  - `@xyflow/react` (React Flow)
-  - Recharts (Area & Bar financial charts)
-  - Lucide React
-  - jsPDF
-- **Backend:**
-  - Node.js & Express
-  - Google Gen AI SDK (`@google/generative-ai` - Gemini 1.5 Flash)
-  - Multer (Multimodal buffer ingestion)
-  - Zod (Runtime validation)
-  - tsx & concurrently
+The planned workflow is:
+1. Upload invoices, receipts, and bank transaction files.
+2. Extract dates, amounts, invoice numbers, and supplier names.
+3. Organize the extracted information.
+4. Compare records and check calculations.
+5. Highlight potential duplicates, mismatches, and missing information.
+6. Generate a report explaining the highlighted issues and its evidences.
 
----
+A human reviews the findings before taking action.
 
-## 🚀 Getting Started
 
-### 1. Prerequisites
-- Node.js v18+ (tested on Node v24)
-- npm v9+
+## 4. Setup and run
+Open the AuditLens project in a web browser or development environment.
 
-### 2. Installation
-```bash
-npm install
-```
+Install the required dependencies.
 
-### 3. Environment Variables (Optional)
-Copy `.env.example` to `.env`:
-```bash
-cp .env.example .env
-```
-Add your Google Gemini API key if you wish to run live multimodal document extraction:
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-PORT=3001
-```
-*(Note: If no API key is set, AuditLens automatically runs in full synthetic demo mode with the PixelCraft Studio dataset).*
+Configure the necessary API keys.
 
-### 4. Running the Forensic Engine Tests
-Verify all 8 deterministic rules and the 6 key findings on the PixelCraft Studio dataset:
-```bash
-npm run test:engine
-```
+Start the application using the provided development instructions.
 
-### 5. Running the Application
-Launch both the Express API server (port 3001) and the Vite frontend dev server (port 5173):
-```bash
-npm run dev
-```
+Upload a sample financial document to test the analysis.
 
-Open your browser to:
-- **Landing Page:** `http://localhost:5173/`
-- **Overview Radar Dashboard:** `http://localhost:5173/dashboard`
-- **Evidence Graph:** `http://localhost:5173/graph`
-- **Investigations:** `http://localhost:5173/investigations`
-- **Document Vault:** `http://localhost:5173/documents`
-- **Transactions:** `http://localhost:5173/transactions`
-- **Vendor Vault:** `http://localhost:5173/vendors`
-- **CPA Reports & Tax Export:** `http://localhost:5173/reports`
-- **Settings & Gemini Config:** `http://localhost:5173/settings`
+## 5. Models and data
+AuditLens may use an AI model to extract information from documents or explain potential inconsistencies.
 
----
+For the prototype, we plan to use synthetic financial documents or other appropriately licensed data.
+Models used :
+- Frontend: React, TypeScript, Vite
+- Backend: Node.js
+- AI model/API: OpenAI API
+- Document processing: PDF and image text extraction
+- Database: PostgreSQL
+- Development tools: Google AI sstudio, Antigravity IDE, VS code
 
-## 🏢 Synthetic Dataset: PixelCraft Studio
 
-AuditLens comes pre-loaded with the **PixelCraft Studio** dataset (a 24-person digital agency):
-- **CloudBox Inc (`CB-101`):** Dual ₹999 debits across Chase Card *4491 and Amex Platinum *1004.
-- **Apex Logistics (`INV-8821`):** Spoofed email (`@apex-loglstics.com` with 'l' not 'i'), altered wire instructions to Cayman Trust (*9012) vs historical Chase (*4491), and a ₹3,000 wire amount inflation.
-- **Figma Inc:** Figma Enterprise ($450/mo, 15 seats) on corporate Amex overlapping with Figma Pro ($45/mo, 3 seats) on an employee Chase card.
-- **InVision Technologies:** Zombie Enterprise license ($380/mo) with 0 active logins in 112 days ($4,560/yr waste).
-- **Delta Air Lines & Notion:** Legitimate business expenses cleanly reconciled against bank debits (100% tax compliant).
+## 6. Evaluation and guardrails
+We will test AuditLens using different examples, including:
+- Correct invoices.
+- Duplicate invoice numbers.
+- Incorrect totals.
+- Missing information.
+- Documents with unclear or incomplete text.
 
----
+AuditLens highlights potential inconsistencies, it does not independently establish fraud, or legal non-compliance. Results should be verified by a human reviewer.
 
-## 🔒 Security & Data Integrity
+## 7. Known limitations and risks
+- Poor-quality images may lead to incorrect text extraction.
+- Some errors may go undetected.
+- Valid transactions may sometimes be flagged incorrectly.
+- AI-generated explanations may contain mistakes.
+- The prototype cannot guarantee that every financial or compliance issue will be identified.
+- Sensitive financial documents must be handled securely.
 
-- Read-only banking feeds (Plaid API compatible schema).
-- No hardcoded secrets; API keys managed through environment variables or secure session configuration.
-- SHA-256 pre-computed ledger hashes for all verified receipts and approvals.
+
+## 8. Data Sources and Licensing
+
+The prototype uses synthetic financial documents created for demonstration and testing. No real customer financial data is required for the demo.
+
+Synthetic demo data will be used where appropriate. Any external datasets, libraries, models, and other resources will be acknowledged along with their applicable licenses.
+
+
+## 9. Team
+- Harikrishnan K R 
+- Haridev Satheesh
+
+
+
+## 10. Product Demo
+
+The AuditLens demo demonstrates uploading financial documents, extracting key information, identifying potential inconsistencies, and generating an evidence-based report for human review.
+
+Demo inputs include sample invoices and financial documents containing both valid records and deliberately introduced anomalies.
+
+
+
