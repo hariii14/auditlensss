@@ -97,5 +97,6 @@ The AuditLens demo demonstrates uploading financial documents, extracting key in
 
 Demo inputs include sample invoices and financial documents containing both valid records and deliberately introduced anomalies.
 https://auditlensss.vercel.app/dashboard
+presentation link: https://www.canva.com/design/DAHYv4yDrHw/238S75ZOP9q-HTyKM6FJSg/edit
 
 
